@@ -1,16 +1,37 @@
 const express = require("express");
+const mongoose  = require("mongoose");
+const bodyparser    =require("body-parser");
+const Expense     =require("./models/expense");
+const User     =require("./models/user");
+const expenseRouter    =require("./routes/expenseRoute");
+const userRouter    =require("./routes/user");
 const index   =express();
+
+mongoose.connect("mongodb://vishal:cyberne7work@ds117469.mlab.com:17469/flatmate")
+    .then(()=>{console.log("Connected to Database")})
+    .catch((err)=>{console.log(err.message)});
 
 
 // Middileware Handling
 
 index.set("view engine","ejs");
 index.use(express.static("public"));
+index.use(bodyparser.urlencoded({extended:true}));
+index.use("/user",expenseRouter);
+index.use("/user",userRouter);
+
 
 
 // Routes
-index.get("/",(req,res)=>{
-    res.render("home");
+index.get("/",async (req,res)=>{
+    let a = 0;
+    const expense =await Expense.find({});
+    const amount = expense.forEach(exp=>{
+         a=a+ exp.expamount;
+    })
+    const user = await User.find({});
+    console.log(user.length)
+    res.render("home",{expense:expense,total:a,user:user});
 });
 
 

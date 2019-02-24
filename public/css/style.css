@@ -1,5 +1,5 @@
 .totalexp{
-    background: red;
+    background: #e74c3c;
     padding: 1rem;
     display: inline-block;
     width: 100%;
@@ -23,13 +23,14 @@
     float: right;
 }
 .heading{
-    background: #27ae60;
-    color: #fff;
+    background: #bdc3c7;
+    color: #2c3e50;
     padding: 1rem;
     line-height: 1;
     border-radius: 5px;
     font-size: 1.3rem;
-    margin-top: 10px;
+    margin: 10px 0px;
+
 }
 .clearfix{
     clear: both;

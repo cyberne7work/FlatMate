@@ -3,47 +3,70 @@
     <div class="container">
         <div class="jumbotron">
             <h1 class="display-4">Welcome To FlatMate</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <p class="lead">Man needs his difficulties because they are necessary to enjoy success. - A. P. J. Abdul Kalam </p>
             <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">New Mate</a>
+            <p>To Add New User. Click on New Mate</p>
+            <a class="btn btn-primary btn-lg" href="/user/newuser" role="button">New Mate</a>
           </div>
         <div class="totalexp">
             <div class="name ">
                 Total Expense
             </div>  
             <div class="rupess ">
-                <p>45000</p>
+  
+                <p><i class="fas fa-rupee-sign"></i><%=total%></p>
             </div>
             
             </div>
-        <div class="heading">
-                    Add Expense
-            </div>
-        <div>
-            <form>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Expense Name</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
+            <%if(user.length !==0){%>
+                <div class="heading">
+                        Add Expense
                 </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Amount</label>
-                  <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Amount">
-                </div>
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Expense By
-                    </a>
-                  
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Person 1</a>
-                      <a class="dropdown-item" href="#">Person 2</a>
-                      <a class="dropdown-item" href="#">Person 3</a>
+            <div>
+                <form action="/user/newexpense" method="POST">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Expense Name</label>
+                      <input type="text" class="form-control" name="expname" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
                     </div>
-                  </div>
-                <button type="submit" class="btn btn-primary btn-right">Add</button>
-              </form>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Amount</label>
+                      <input type="number" class="form-control" name="expamount" id="exampleInputPassword1" placeholder="Amount">
+                    </div>
+                    
+                      
+                        <select class="dropdown" name="expby">
+                                <option selected>Expense By</option>
+                                <% user.forEach(mate=>{%>
+                                    <option value="<%=mate.username%>"><%=mate.username%></option>
+                                <%})%>
+                              </select>
+                   
+                    <button type="submit" class="btn btn-primary btn-right">Add</button>
+                  </form>
+                </div>
+            <%}%>
+
+            <div class="clearfix">
+
             </div>
+
+            <div class="heading">
+                    Expense Detail
+            </div>
+            <div class="row">
+            <% expense.forEach(exp=>{ %>
+                
+                    <div class="col-xl-4 col-lg-3 col-md-3 col-sm-1">
+                            <div class="card text-white bg-info mb-3" style="max-width: 100%;">
+                                    <div class="card-header"> Expense By <%=exp.expby%></div>
+                                    <div class="card-body">
+                                      <h5 class="card-title"><%=exp.expname%></h5>
+                                      <p class="card-text"><i class="fas fa-rupee-sign"></i><%=exp.expamount%></p>
+                                    </div>
+                    </div>                        
+                  </div>              
+            <%})%>
+        </div>
     </div>
 
     <% include ./particles/footer %>
