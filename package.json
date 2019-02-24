@@ -1,0 +1,25 @@
+{
+  "name": "flatmate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyberne7work/FlatMate.git"
+  },
+  "author": "vishal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cyberne7work/FlatMate/issues"
+  },
+  "homepage": "https://github.com/cyberne7work/FlatMate#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "epress": "0.0.1-security",
+    "mongoose": "^5.4.15"
+  }
+}
