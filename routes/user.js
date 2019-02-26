@@ -16,5 +16,19 @@ router.post("/newuser",async (req,res)=>{
     res.redirect("/");    
 });
 
+router.get("/expense",async (req,res)=>{
+    const user = await User.find();
+    if(user.length===0){
+        return console.log("No user Found");
+    }
+    console.log(user);
+    res.render("myexpense",{user:user});
+});
+
+router.post("/expense",async (req,res)=>{
+    const {selecteduser}=req.body;
+    const expdetail = await User.find({username:selecteduser});
+    res.redirect("/user/myexpense");
+})
 
 module.exports=router;

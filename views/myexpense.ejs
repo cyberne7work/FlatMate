@@ -1,0 +1,21 @@
+<% include ./particles/header%>
+
+<div class="container">
+    <div>
+           <div class="exp-heading">
+            Select User
+            <div class="exp-heading-form">
+                <form action="/user/expense" method="POST">
+                    <select class="" name="seleteduser">
+                        <%user.forEach(mate=>{%>
+                            <option value="<%=mate.username%>"><%=mate.username%></option>
+                        <%})%>                        
+                    </select>
+                    <button type="submit" class="btn-submit">Submit</button>
+                </form>
+            </div>
+           </div>
+    </div>
+</div>
+
+<% include ./particles/footer%>
