@@ -7,9 +7,7 @@ const expenseRouter    =require("./routes/expenseRoute");
 const userRouter    =require("./routes/user");
 const index   =express();
 
-const db = "mongodb://vishal:cyberne7work@ds117469.mlab.com:17469/flatmate";
-
-mongoose.connect("mongodb://localhost/flatmate")
+mongoose.connect("mongodb://vishal:cyberne7work@ds117469.mlab.com:17469/flatmate",{ useNewUrlParser: true })
     .then(()=>{console.log("Connected to Database")})
     .catch((err)=>{console.log(err.message)});
 

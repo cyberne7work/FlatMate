@@ -1,21 +1,22 @@
 <% include ./particles/header%>
 
 <div class="container">
-    <div>
-           <div class="exp-heading">
-            Select User
-            <div class="exp-heading-form">
-                <form action="/user/expense" method="POST">
-                    <select class="" name="seleteduser">
-                        <%user.forEach(mate=>{%>
-                            <option value="<%=mate.username%>"><%=mate.username%></option>
-                        <%})%>                        
-                    </select>
-                    <button type="submit" class="btn-submit">Submit</button>
-                </form>
-            </div>
-           </div>
+    <div class="header">
+        Expense By <%=expdetail[0].expby%>
     </div>
+    <% expdetail.forEach(exp=>{ %>
+                
+        <div class="col-xl-4 col-lg-3 col-md-3 col-sm-1">
+                <div class="card text-white bg-info mb-3" style="max-width: 100%;">
+                        <div class="card-header"> Expense By <%=exp.expby%></div>
+                        <div class="card-body">
+                          <h5 class="card-title"><%=exp.expname%></h5>
+                          <p class="card-text"><i class="fas fa-rupee-sign"></i><%=exp.expamount%></p>
+                        </div>
+        </div>                        
+      </div>              
+<%})%>
+</div>
 </div>
 
 <% include ./particles/footer%>

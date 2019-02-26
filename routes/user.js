@@ -1,5 +1,6 @@
 const express = require("express");
 const User = require("../models/user");
+const Expense = require("../models/expense");
 const router  = express.Router();
 
 router.get("/newuser",async (req,res)=>{
@@ -27,8 +28,10 @@ router.get("/expense",async (req,res)=>{
 
 router.post("/expense",async (req,res)=>{
     const {selecteduser}=req.body;
-    const expdetail = await User.find({username:selecteduser});
-    res.redirect("/user/myexpense");
+    console.log(req.body)
+    const expdetail = await Expense.find({expby:selecteduser});
+    console.log(expdetail)
+    res.render("myexpense",{expdetail:expdetail});
 })
 
 module.exports=router;
