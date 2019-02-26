@@ -1,21 +1,31 @@
 <% include ./particles/header%>
 
 <div class="container">
-    <div class="header">
-        Expense By <%=expdetail[0].expby%>
+
+    <%if(expdetail.length===0){%>
+        <div class="heading">
+                No Expense By <span class="user-heading"><%=user[0].username%></span>
+            </div>
+    <%}else{%>
+    <div class="heading">
+        Expense By <span class="user-heading"><%=expdetail[0].expby%></span> <span class="right-ele">Total <i class="fas fa-rupee-sign"></i><%=totalamount%></span>
     </div>
-    <% expdetail.forEach(exp=>{ %>
+    <div class="row">
+            <% expdetail.forEach(exp=>{ %>
                 
-        <div class="col-xl-4 col-lg-3 col-md-3 col-sm-1">
-                <div class="card text-white bg-info mb-3" style="max-width: 100%;">
-                        <div class="card-header"> Expense By <%=exp.expby%></div>
-                        <div class="card-body">
-                          <h5 class="card-title"><%=exp.expname%></h5>
-                          <p class="card-text"><i class="fas fa-rupee-sign"></i><%=exp.expamount%></p>
-                        </div>
-        </div>                        
-      </div>              
-<%})%>
+                <div class="col-xl-4 col-lg-3 col-md-3 col-sm-1">
+                        <div class="card text-white bg-info mb-3" style="max-width: 100%;">
+                                <div class="card-header"> Expense On <%=exp.expdate%></div>
+                                <div class="card-body">
+                                  <h5 class="card-title"><%=exp.expname%></h5>
+                                  <p class="card-text"><i class="fas fa-rupee-sign"></i><%=exp.expamount%></p>
+                                </div>
+                </div>                        
+              </div>              
+        <%})%>
+    </div>
+    
+<%}%>
 </div>
 </div>
 

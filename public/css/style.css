@@ -57,3 +57,19 @@
     border-radius: 5px;
     font-size: 1.2rem;
 }
+
+
+/* Global */
+.user{
+    color: #f1c40f;
+}
+.user-heading{
+    color: #27ae60;
+    text-transform: uppercase;
+}
+.opt-user{
+    text-transform: uppercase;
+}
+.right-ele{
+    float: right;
+}

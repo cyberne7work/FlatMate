@@ -51,12 +51,12 @@
             </div>
             <div>
                     <div class="exp-heading">
-                     Select User
+                     Expense By User
                      <div class="exp-heading-form">
                          <form action="/user/expense" method="POST">
-                             <select class="" name="selecteduser">
+                             <select class="" name="selecteduser"  required>
                                  <%user.forEach(mate=>{%>
-                                     <option value="<%=mate.username%>"><%=mate.username%></option>
+                                     <option value="<%=mate.username%>" class="opt-user"><%=mate.username%></option>
                                  <%})%>                        
                              </select>
                              <button type="submit" class="btn-submit">Submit</button>
@@ -73,7 +73,7 @@
                 
                     <div class="col-xl-4 col-lg-3 col-md-3 col-sm-1">
                             <div class="card text-white bg-info mb-3" style="max-width: 100%;">
-                                    <div class="card-header"> Expense By <%=exp.expby%></div>
+                                    <div class="card-header"> Expense By <span class="user"><%=exp.expby%></span> <span><%=exp.expdate%> </span></div>
                                     <div class="card-body">
                                       <h5 class="card-title"><%=exp.expname%></h5>
                                       <p class="card-text"><i class="fas fa-rupee-sign"></i><%=exp.expamount%></p>

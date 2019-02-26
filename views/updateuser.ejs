@@ -1,22 +1,22 @@
 <% include ./particles/header %>
 
 <div class="container">
-        <form action="/user/newuser" method="POST">
+        <form action="/user/<%=user._id%>?_method=PUT" method="POST">
                 <div class="form-group">
                   <label for="username">Username</label>
-                  <input type="text" class="form-control" name="username" id="" aria-describedby="username" placeholder="Enter Username" required>
+                  <input type="text" class="form-control" name="user[username]" id="" aria-describedby="username" placeholder="Enter Username" value="<%=user.username%>" required>
                 </div>
                 <div class="form-group">
                   <label for="usersalary">Salary</label>
-                  <input type="number" class="form-control" name="usersalary" id="" placeholder="salary" required>
+                  <input type="number" class="form-control" name="user[usersalary]" id="" placeholder="salary" value="<%=user.usersalary%>" required>
                 </div>
                 <div class="form-group">
                  <label for="usersalary">Mobile</label>
-                 <input type="number" class="form-control" name="usermobile" id="" placeholder="Mobile" required>
+                 <input type="number" class="form-control" name="user[usermobile]" id="" placeholder="Mobile" value="<%=user.usermobile%>" required>
                 </div>
                 <div class="form-group">
                  <label for="usersalary">Job / Prep.</label>
-                <input type="text" class="form-control" name="userjob" id="" placeholder="Job / Prep." required>
+                <input type="text" class="form-control" name="user[userjob]" id="" placeholder="Job / Prep." value="<%=user.userjob%>"required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-right">Submit</button>
               </form>

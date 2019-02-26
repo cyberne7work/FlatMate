@@ -14,7 +14,7 @@ const ExpenceSchema = new mongoose.Schema({
         required:true
     },
     expdate:{
-        type:String,
+        type:Date,
         require:true,
         default:Date.now(),
     }

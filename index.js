@@ -1,12 +1,13 @@
 const express = require("express");
 const mongoose  = require("mongoose");
 const bodyparser    =require("body-parser");
+const methodOverride    = require("method-override");
 const Expense     =require("./models/expense");
 const User     =require("./models/user");
 const expenseRouter    =require("./routes/expenseRoute");
 const userRouter    =require("./routes/user");
 const index   =express();
-
+const db="vishal:cyberne7work@ds117469.mlab.com:17469/flatmate";
 mongoose.connect("mongodb://vishal:cyberne7work@ds117469.mlab.com:17469/flatmate",{ useNewUrlParser: true })
     .then(()=>{console.log("Connected to Database")})
     .catch((err)=>{console.log(err.message)});
@@ -17,6 +18,7 @@ mongoose.connect("mongodb://vishal:cyberne7work@ds117469.mlab.com:17469/flatmate
 index.set("view engine","ejs");
 index.use(express.static("public"));
 index.use(bodyparser.urlencoded({extended:true}));
+index.use(methodOverride("_method"));
 index.use("/user",expenseRouter);
 index.use("/user",userRouter);
 

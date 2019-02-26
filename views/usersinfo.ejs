@@ -1,0 +1,28 @@
+<% include ./particles/header %>
+    <div class="container">
+        <div class="row">
+            <%user.forEach(person=>{%>
+               
+                        <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="https://www.bangory.org/wp-content/uploads/2016/05/person-icon.png" alt="Card image cap">
+                                <div class="card-body">
+                                  <h5 class="card-title"><%=person.username%></h5>
+                                  <p class="card-text"><%=person.userjob%></p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                  <li class="list-group-item"><i class="fas fa-rupee-sign"></i><%=person.usersalary%></li>
+                                  <li class="list-group-item"><%=person.usermobile%></li>
+                                </ul>
+                                <div class="card-body">
+                                    <ul>
+                                        <li><a href="/user/<%=person._id%>" class="card-link">Edit</a></li>
+                                        <li><form action="/user/<%=person._id%>?_method=DELETE" method="POST">
+                                            <button type="submit">delete</button>
+                                        </form></li>
+                                    </ul>
+                                </div>
+                              </div>
+            <%})%>
+        </div>
+    </div>
+<% include ./particles/footer %>
