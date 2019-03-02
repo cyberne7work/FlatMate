@@ -48,7 +48,7 @@ router.get("/:id",async (req,res)=>{
     }
     res.render("updateuser",{user:user});
 });
-router.put("/expense/:id",async (req,res)=>{
+router.put("/:id",async (req,res)=>{
     const user = await User.findByIdAndUpdate(req.params.id,{$set:req.body.user});
     if(!user){
         return res.send("User Not Found")
