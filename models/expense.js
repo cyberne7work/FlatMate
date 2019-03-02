@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const ExpenceSchema = new mongoose.Schema({
+    flatid:{
+        type:mongoose.Types.ObjectId,
+        ref:'flat'
+    },
     expname:{
         type:String,
         required:true,

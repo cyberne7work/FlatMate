@@ -11,7 +11,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">FlatMate</a>
+        <a class="navbar-brand" href="/"><i class="fas fa-home"></i>FlatMate</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -21,15 +21,23 @@
             <li class="nav-item active">
               <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
+            <%if(currentUser){%>
             <li class="nav-item">
               <a class="nav-link" href="/user/info">Mate's Info</a>
             </li>
-            <li class="nav-item">
+            <%}%>
+            <!-- <li class="nav-item">
               <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
+            </li> -->
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
-          </form>
+          <%if(currentUser){%>
+            <form class="form-inline my-2 my-lg-0" action="/user/logout" method="POST">
+              <button class="btn btn-outline-danger my-2 my-sm-0" type="submit"><i class="fas fa-sign-out-alt"></i>Logout</button>
+            </form>
+          <%}else{%>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/user/signup"><button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-user-plus"></i>SignUp</button></a></li>
+            </ul>
+          <%}%>
         </div>
       </nav>

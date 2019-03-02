@@ -20,6 +20,17 @@
                                   <h5 class="card-title"><%=exp.expname%></h5>
                                   <p class="card-text"><i class="fas fa-rupee-sign"></i><%=exp.expamount%></p>
                                 </div>
+                                <div class="useroption">
+                                        <div class="edit">
+                                                <a href="/user/expense/<%=exp._id%>"><button class="btn-edit">Edit</button></a>
+                                        </div>
+                                        
+                                        <div class="delete">
+                                            <form action="/user/expense/<%=exp._id%>?_method=DELETE" method="POST">
+                                                <button class="btn-delete">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
                 </div>                        
               </div>              
         <%})%>

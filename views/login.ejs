@@ -1,0 +1,35 @@
+<%include ./particles/header %>
+    <div class="container">
+        <div class="login">
+            <form action="/user/login" method="POST">
+                <div class="form-group">
+                        <label for="">Email</label>
+                        <input type="text" class="form-control" name="email" id="">  
+                </div>
+                <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" class="form-control" name="password" id="">
+                </div>
+                <div>
+                    <a href="/forget">Forget Password</a>
+                </div>
+                <div>
+                    <a href="/signup">New User? <span>Register Here</span> </a>
+                </div>
+                <button type="submit" class="btn-signup">Login</button>
+            </form>
+            <div class="clearfix">
+
+            </div>
+            <div class="auth-heading">
+                Login or Register Using 
+            </div>
+            <div class="btn-auth">
+                <a  href="/">
+                <button class="btn-facebook"><i class="fab fa-facebook-f"></i>Facebook (Now Unavailable)</button>
+                </a><br>
+                <a href="/"><button class="btn-gmail"><i class="far fa-envelope"></i>Gmail (Now Unavailable)</button></a>
+            </div>
+        </div>
+    </div>
+<%include ./particles/footer %>

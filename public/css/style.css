@@ -9,6 +9,13 @@
     line-height: 1;
 
 }
+.expname{
+    text-transform: capitalize;
+    font-size: 1.2rem;
+}
+.expamount{
+    font-size: 1.2rem;
+}
 .name{
     float: left;
     font-size: 1.3rem;
@@ -60,7 +67,12 @@
 
 
 /* Global */
+.card{
+    margin-top: 10px;
+}
 .user{
+    text-transform: uppercase;
+    font-size: 1.2rem;
     color: #f1c40f;
 }
 .user-heading{
@@ -72,4 +84,136 @@
 }
 .right-ele{
     float: right;
+}
+
+/* authentication */
+.login{
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+.auth-heading{
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    background: #ecf0f1;
+    margin: 10px 0px;
+    border-radius: 5px;
+    padding: 10px;
+    color: #2c3e50;
+}
+.btn-auth{
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 10px 0px;
+    border-radius: 5px;
+    padding: 10px;
+}
+.btn-facebook{
+    width: 100%;
+    color: #fff;
+    background: #4060B8;
+    padding: 10px;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    margin: 10px 0px;
+    letter-spacing: 1px;
+}
+.fa-facebook-f{
+    margin: 0px 10px;
+    font-size: 1.5rem;
+}
+.fa-envelope{
+    margin: 0px 10px;
+    font-size: 1.5rem; 
+}
+.btn-gmail{
+    width: 100%;
+    color: #fff;
+    background: #EC3526;
+    padding: 10px;
+    font-size: 1.3rem;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    margin: 10px 0px;
+}
+.btn-signup{
+    background: green;
+    color: #fff;
+    padding: 8px;
+    float: right;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 300;
+
+}
+@media only screen and (max-width: 600px) {
+    .login{
+        width: 100%;
+    }
+  }
+
+/* User */
+.userjob{
+    text-transform: capitalize;
+    font-size: 1.2rem;
+}
+.username{
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.3rem;
+}
+.usermobile{
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+}
+.usersalary{
+    font-size: 1.3rem;
+}
+.useroption{
+    display: inline-block;
+}
+.useroption .edit{
+    width: 44%;
+    margin: 0px 10px;
+    float: left;
+    margin-bottom: 10px;
+}
+.useroption .delete{
+    width: 44%;
+    margin: 0px 10px;
+    float: right;
+}
+.btn-edit , .btn-delete{
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    border: none;
+    font-size: 1.1rem;
+    padding: 5px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+}
+.btn-delete{
+    background: #e74c3c;
+}
+.btn-edit{
+    background: #2980b9;
+}
+.fa-mobile-alt{
+    margin-right:10px;
+    font-size: 1.3rem;
+}
+.fa-rupee-sign{
+    margin-right: 10px;
+}
+.fa-user{
+    margin-right: 10px;
+}
+.fa-briefcase{
+    margin-right: 10px;
 }

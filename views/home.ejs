@@ -2,7 +2,7 @@
 
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-4">Welcome To FlatMate</h1>
+            <h1 class="display-4">Welcome To <%=currentUser.local.flatname%></h1>
             <p class="lead">Man needs his difficulties because they are necessary to enjoy success. - A. P. J. Abdul Kalam </p>
             <hr class="my-4">
             <p>To Add New User. Click on New Mate</p>
@@ -26,16 +26,17 @@
                 <form action="/user/newexpense" method="POST">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Expense Name</label>
-                      <input type="text" class="form-control" name="expname" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
+                      <input type="text" class="form-control" name="expname" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" required>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Amount</label>
-                      <input type="number" class="form-control" name="expamount" id="exampleInputPassword1" placeholder="Amount">
+                      <input type="number" class="form-control" name="expamount" id="exampleInputPassword1" placeholder="Amount" required>
                     </div>
                     
-                      
-                        <select class="dropdown" name="expby">
-                                <option selected>Expense By</option>
+                      <div class="expenseby">
+                          Expense By
+                      </div>
+                        <select class="dropdown" name="expby" required>
                                 <% user.forEach(mate=>{%>
                                     <option value="<%=mate.username%>"><%=mate.username%></option>
                                 <%})%>
@@ -73,10 +74,10 @@
                 
                     <div class="col-xl-4 col-lg-3 col-md-3 col-sm-1">
                             <div class="card text-white bg-info mb-3" style="max-width: 100%;">
-                                    <div class="card-header"> Expense By <span class="user"><%=exp.expby%></span> <span><%=exp.expdate%> </span></div>
+                                    <div class="card-header"> Expense By <span class="user"><%=exp.expby%></span> On <span><%=exp.expdate%> </span></div>
                                     <div class="card-body">
-                                      <h5 class="card-title"><%=exp.expname%></h5>
-                                      <p class="card-text"><i class="fas fa-rupee-sign"></i><%=exp.expamount%></p>
+                                      <h5 class="card-title expname"><%=exp.expname%></h5>
+                                      <p class="card-text expamount"><i class="fas fa-rupee-sign"></i><%=exp.expamount%></p>
                                     </div>
                     </div>                        
                   </div>              

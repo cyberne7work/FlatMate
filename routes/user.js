@@ -8,9 +8,15 @@ router.get("/newuser",async (req,res)=>{
 })
 
 router.post("/newuser",async (req,res)=>{
+    console.log("your session id",req.user._id);
     const { username,usersalary,usermobile,userjob}=req.body;
-    const newUser = new User({username,usersalary,usermobile,userjob});
-    const user = await User.create(newUser);
+    const newUser = new User();
+        newUser.userid=req.user._id,
+        newUser.username=username,
+        newUser.usersalary=usersalary,
+        newUser.usermobile=usermobile,
+        newUser.userjob=userjob
+    const user = await newUser.save();
     if(!user){
         return res.send("Can't Create new User")
     }
@@ -42,7 +48,7 @@ router.get("/:id",async (req,res)=>{
     }
     res.render("updateuser",{user:user});
 });
-router.put("/:id",async (req,res)=>{
+router.put("/expense/:id",async (req,res)=>{
     const user = await User.findByIdAndUpdate(req.params.id,{$set:req.body.user});
     if(!user){
         return res.send("User Not Found")
@@ -50,6 +56,9 @@ router.put("/:id",async (req,res)=>{
     res.redirect("/user/info");
 });
 
+
+
+// Delete Route
 router.delete("/:id",async (req,res)=>{
     const user = await User.findByIdAndDelete(req.params.id);
     if(!user){
@@ -57,7 +66,5 @@ router.delete("/:id",async (req,res)=>{
     }
     res.redirect("/user/info");
 });
-
-// Delete Route
 
 module.exports=router;
