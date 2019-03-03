@@ -44,6 +44,23 @@
 }
 
 /* My expense page */
+.jumbotron{
+    margin-top: 10px;
+}
+.flatname{
+    color: #e67e22;
+    text-transform: uppercase;
+}
+.flatquote{
+    color: #e67e22;
+}
+.btn-flat{
+    background-color: green;
+    color: #fff;
+    padding: 8px;
+    border: none;
+    border-radius: 5px
+}
 .exp-heading{
     background: #bdc3c7;
     color: #2c3e50;

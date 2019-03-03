@@ -9,10 +9,12 @@ const cookieParser      =require("cookie-parser");
 const MongoStore = require('connect-mongo')(session);
 const Expense     =require("./models/expense");
 const User     =require("./models/user");
+const Flat      =require("./models/flat");
 const morgan    =require('morgan')
-const Flat      =require("./models/flat")
+const Mates      =require("./models/mate")
 const expenseRouter    =require("./routes/expenseRoute");
-const userRouter    =require("./routes/user");
+const mateRouter    =require("./routes/mate");
+const flatRouter    =require("./routes/flat");
 const authRouter    =require("./routes/authentication");
 const flash         =require("connect-flash");
 const redirectLogin =require("./middleware/rediretlogin");
@@ -58,7 +60,7 @@ passport.use(new LocalStrategy({
     usernameField:"email",
     passwordField:"password"
 },function(usernameField,passwordField,done){
-    Flat.findOne({ 'local.email': usernameField }, function (err, user) {
+    User.findOne({ 'local.email': usernameField }, function (err, user) {
       if (err) { return done(err); }
       if (!user) { return done(null, false); }
       if (!user.validPassword(passwordField)) { return done(null, false); }
@@ -66,32 +68,35 @@ passport.use(new LocalStrategy({
     });
   }))
   passport.serializeUser(
-      function(flat,done){
-          done(null,flat);
+      function(user,done){
+          done(null,user);
       }
   );
   passport.deserializeUser(
-      function(flat,done){
-          done(null,flat);
+      function(user,done){
+          done(null,user);
       }
   );
 
 // Route Handler
 index.use("/user",expenseRouter);
 index.use("/user",authRouter);
-index.use("/user",userRouter);
+index.use("/mate",mateRouter);
+index.use("/flat",flatRouter);
 
 
 
 
 index.get("/home",redirectLogin,async (req,res)=>{
     let a = 0;
-    const expense =await Expense.find({});
+    const flat = await Flat.findOne({flatid:req.user._id});
+    console.log(flat);
+    const expense = await Expense.find({flatid:req.user._id});
     const amount = expense.forEach(exp=>{
-         a=a+ exp.expamount;
+        a=a+exp.expamount;
     })
-    const user = await User.find({});
-    res.render("home",{expense:expense,total:a,user:user});
+    const mate = await Mates.find({mateid:req.user._id});    
+    res.render("home",{total:a,user:mate,expense:expense,flatinfo:flat});
 });
 
 index.get("/",redirectHome,async (req,res)=>{

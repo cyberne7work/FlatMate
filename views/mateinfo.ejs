@@ -1,23 +1,23 @@
 <% include ./particles/header %>
     <div class="container">
         <div class="row">
-            <%user.forEach(person=>{%>
+            <%mate.forEach(person=>{%>
 
                 <div class="col-xl-4 col-lg-3 col-md-3 col-sm-1">
                         <div class="card text-white bg-info mb-3" style="max-width: 100%;">
-                                <div class="card-header"><span class="username"><i class="fas fa-user"></i><%=person.username%></span></div>
+                                <div class="card-header"><span class="username"><i class="fas fa-user"></i><%=person.matename%></span></div>
                                 <div class="card-body">
-                                  <p class="card-title"><span class="userjob"><i class="fas fa-briefcase"></i><%=person.userjob%></span></p>
-                                  <p class="card-text"><span class="usermobile"><i class="fas fa-mobile-alt"></i><%=person.usermobile%></span></p>
-                                  <p class="card-title"><span class="usersalary"><i class="fas fa-rupee-sign"></i><%=person.usersalary%> Remains</span></p>
+                                  <p class="card-title"><span class="userjob"><i class="fas fa-briefcase"></i><%=person.matejob%></span></p>
+                                  <p class="card-text"><span class="usermobile"><i class="fas fa-mobile-alt"></i><%=person.matemobile%></span></p>
+                                  <p class="card-title"><span class="usersalary"><i class="fas fa-rupee-sign"></i><%=person.matesalary%></span></p>
                                 </div>
                         <div class="useroption">
                             <div class="edit">
-                                    <a href="/user/<%=person._id%>"><button class="btn-edit">Edit</button></a>
+                                    <a href="/mate/<%=person._id%>"><button class="btn-edit">Edit</button></a>
                             </div>
                             
                             <div class="delete">
-                                <form action="/user/<%=person._id%>" method="POST">
+                                <form action="/mate/<%=person._id%>?_method=DELETE" method="POST">
                                     <button class="btn-delete">Delete</button>
                                 </form>
                             </div>

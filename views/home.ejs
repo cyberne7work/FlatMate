@@ -2,11 +2,17 @@
 
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-4">Welcome To <%=currentUser.local.flatname%></h1>
-            <p class="lead">Man needs his difficulties because they are necessary to enjoy success. - A. P. J. Abdul Kalam </p>
+            <%if(!flatinfo.flatname){%>
+                <div>
+                    <a href="/flat/update"><button class="btn-flat">Give a name to your Home</button></a>
+                </div>
+            <%}else{%>
+                <h3 class="display-4">Welcome To <span class="flatname"><%=flatinfo.flatname%></span></h3>
+                <p class="lead"> <span class="flatquote"><%=flatinfo.flatquote%></span></p>
+            <%}%>
             <hr class="my-4">
             <p>To Add New User. Click on New Mate</p>
-            <a class="btn btn-primary btn-lg" href="/user/newuser" role="button">New Mate</a>
+            <a class="btn btn-primary btn-lg" href="/mate/newMate" role="button">New Mate</a>
           </div>
         <div class="totalexp">
             <div class="name ">
@@ -38,7 +44,7 @@
                       </div>
                         <select class="dropdown" name="expby" required>
                                 <% user.forEach(mate=>{%>
-                                    <option value="<%=mate.username%>"><%=mate.username%></option>
+                                    <option value="<%=mate.matename%>"><%=mate.matename%></option>
                                 <%})%>
                               </select>
                    
@@ -54,10 +60,10 @@
                     <div class="exp-heading">
                      Expense By User
                      <div class="exp-heading-form">
-                         <form action="/user/expense" method="POST">
+                         <form action="/mate/expense" method="POST">
                              <select class="" name="selecteduser"  required>
                                  <%user.forEach(mate=>{%>
-                                     <option value="<%=mate.username%>" class="opt-user"><%=mate.username%></option>
+                                     <option value="<%=mate.matename%>" class="opt-user"><%=mate.matename%></option>
                                  <%})%>                        
                              </select>
                              <button type="submit" class="btn-submit">Submit</button>

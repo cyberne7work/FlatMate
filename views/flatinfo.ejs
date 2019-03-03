@@ -1,0 +1,16 @@
+<% include ./particles/header %>
+
+<div class="container">
+        <form action="/flat/<%=flat._id%>?_method=PUT" method="POST">
+                <div class="form-group">
+                  <label for="matename">Flat Name (Gokulam, Mannat, Dream Palace)</label>
+                  <input type="text" class="form-control" name="Flat[flatname]" id="" aria-describedby="flatname" placeholder="Flat Name" value="<%=flat.flatname%>" required>
+                </div>
+                <div class="form-group">
+                  <label for="matesalary">Quotes</label>
+                  <input type="text" class="form-control" name="Flat[flatquote]" id="" placeholder="Every moment is a fresh beginning. ..."  value="<%=flat.flatquote%>">
+                </div>
+                <button type="submit" class="btn btn-primary btn-right">Update</button>
+              </form>
+</div>
+<% include ./particles/footer %>

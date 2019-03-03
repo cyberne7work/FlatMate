@@ -1,5 +1,7 @@
 const express = require("express");
 const Expense = require("../models/expense");
+const Flat = require("../models/flat");
+
 const router  = express.Router();
 
 router.post("/newexpense",async (req,res)=>{
@@ -11,8 +13,14 @@ router.post("/newexpense",async (req,res)=>{
     newExp.expby=expby
     
     const expense = await newExp.save();
+    console.log(expense);
     if(!expense){
         return res.send("Cant post new expense")
+    }else{
+        const foundFlat = await Flat.findOne({flatid:req.user._id});
+        foundFlat.expense.push(expense);
+        const result = await foundFlat.save();
+        res.redirect("/");
     }
     res.redirect("/");    
 });

@@ -1,0 +1,24 @@
+<% include ./particles/header %>
+
+<div class="container">
+        <form action="/mate/newMate" method="POST">
+                <div class="form-group">
+                  <label for="matename">Name</label>
+                  <input type="text" class="form-control" name="matename" id="" aria-describedby="matename" placeholder="Enter matename" required>
+                </div>
+                <div class="form-group">
+                  <label for="matesalary">Salary</label>
+                  <input type="number" class="form-control" name="matesalary" id="" placeholder="salary" required>
+                </div>
+                <div class="form-group">
+                 <label for="matesalary">Mobile</label>
+                 <input type="number" class="form-control" name="matemobile" id="" placeholder="Mobile" required>
+                </div>
+                <div class="form-group">
+                 <label for="matesalary">Job / Prep.</label>
+                <input type="text" class="form-control" name="matejob" id="" placeholder="Job / Prep." required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-right">Submit</button>
+              </form>
+</div>
+<% include ./particles/footer %>

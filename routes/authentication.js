@@ -1,7 +1,9 @@
 const express   = require("express");
 const passport  =require("passport");
 const redirectHome  = require("../middleware/redirectHome");
+const User  = require("../models/user");
 const Flat  = require("../models/flat");
+
 const router   =express.Router();
 
 router.get("/signup",redirectHome,async (req,res)=>{
@@ -15,20 +17,23 @@ router.post("/signup",async (req,res)=>{
     }
     console.log(req.body);
     
-    const foundFlat = await Flat.findOne({'local.email':req.body.email});
-    if(foundFlat){
+    const foundUser = await User.findOne({'local.email':req.body.email});
+    if(foundUser){
         return res.send("Email Already Found");
     }
-    const newFlat = new Flat();
-    newFlat.local.flatname=req.body.flatname,
-        newFlat.local.email=req.body.email,
-        newFlat.local.password=newFlat.generateHash(req.body.password);
+    const newUser = new User();
+        newUser.local.email=req.body.email,
+        newUser.local.password=newUser.generateHash(req.body.password);
         console.log("pass"); 
-    if(!newFlat){
+    if(!newUser){
         return console.log("User cant be Created");
     }
-    const result    =await newFlat.save();
-    passport.authenticate("local")(req, res, function(){
+    const result    =await newUser.save();
+    passport.authenticate("local")(req, res, async function(){
+        const newFlat = new Flat();
+        newFlat.flatid=req.user._id;
+        const result= await newFlat.save();
+        console.log(result);
         res.redirect("/home"); 
      });
 });
