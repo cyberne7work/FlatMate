@@ -72,7 +72,7 @@ passport.use(new LocalStrategy({
   passport.use(new FacebookStrategy({
     clientID: 605374846576731,
     clientSecret: 'c3927f6f5b5cbd99e24f0523e72d6ca9',
-    callbackURL: "http://localhost:3000/auth/facebook/callback",
+    callbackURL: "https://boiling-springs-44996.herokuapp.com/auth/facebook/callback",
     profileFields: ['id','email']
   },
   async function(accessToken,refreshToken, profile, done) {
