@@ -5,6 +5,7 @@ const methodOverride    = require("method-override");
 const session           =require("express-session");
 const passport          =require("passport");
 const LocalStrategy     =require("passport-local").Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const cookieParser      =require("cookie-parser");
 const MongoStore = require('connect-mongo')(session);
 const Expense     =require("./models/expense");
@@ -66,7 +67,40 @@ passport.use(new LocalStrategy({
       if (!user.validPassword(passwordField)) { return done(null, false); }
       return done(null, user);
     });
-  }))
+  }));
+
+  passport.use(new FacebookStrategy({
+    clientID: 605374846576731,
+    clientSecret: 'c3927f6f5b5cbd99e24f0523e72d6ca9',
+    callbackURL: "http://localhost:3000/auth/facebook/callback",
+    profileFields: ['id','email']
+  },
+  async function(accessToken,refreshToken, profile, done) {
+      console.log("Acces token",accessToken);
+      console.log("Email",profile.emails[0].value);
+    User.findOne({"facebook.id":profile.id}, function(err, user) {
+      if (err) { return done(err); }  
+      if(user){
+          return done(null,user);
+      }
+      else{
+          const user = new User();
+          console.log("Profile is",profile.id)
+            user.facebook.id=profile.id;
+            user.facebook.email=profile.emails[0].value;
+            user.save(function(err,user){
+                if(err){
+                    return done(err,false);
+                }
+                return done(null,user)
+            })
+        
+      }
+      
+    });
+  }
+));
+
   passport.serializeUser(
       function(user,done){
           done(null,user);
@@ -85,17 +119,28 @@ index.use("/mate",mateRouter);
 index.use("/flat",flatRouter);
 
 
-
+index.get('/auth/facebook',
+  passport.authenticate('facebook',{ scope:  ['public_profile', 'email'] })
+);
+index.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: '/home',
+                                      failureRedirect: '/login' }));
 
 index.get("/home",redirectLogin,async (req,res)=>{
     let a = 0;
-    const flat = await Flat.findOne({flatid:req.user._id});
-    console.log(flat);
     const expense = await Expense.find({flatid:req.user._id});
     const amount = expense.forEach(exp=>{
         a=a+exp.expamount;
     })
-    const mate = await Mates.find({mateid:req.user._id});    
+    const mate = await Mates.find({mateid:req.user._id});
+    const flat = await Flat.findOne({flatid:req.user._id});
+        if(!flat){
+            const newFlat = new Flat();
+            newFlat.flatid=req.user._id;
+            const result=await newFlat.save();
+            return res.render("home",{total:a,user:mate,expense:expense,flatinfo:result});
+        }
+        
     res.render("home",{total:a,user:mate,expense:expense,flatinfo:flat});
 });
 
