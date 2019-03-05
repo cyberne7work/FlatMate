@@ -1,5 +1,7 @@
 <% include ./particles/header %>
+<div class="top">
 
+</div>
     <div class="container">
 
                 <div class="heading">
@@ -9,11 +11,15 @@
                 <form action="/user/expense/<%=exp._id%>?_method=PUT" method="POST">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Expense Name</label>
-                      <input type="text" class="form-control" name="newexp[expname]" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" value="<%=exp.expname%>" >
+                      <input type="text" class="form-control" name="newexp[expname]" id="" aria-describedby="emailHelp" placeholder="Enter Name" value="<%=exp.expname%>" >
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Amount</label>
-                      <input type="number" class="form-control" name="newexp[expamount]" id="exampleInputPassword1" placeholder="Amount" value="<%=exp.expamount%>">
+                      <input type="number" class="form-control" name="newexp[expamount]" id="" placeholder="Amount" value="<%=exp.expamount%>">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Date</label>
+                      <input type="date" class="form-control" name="newexp[expdate]" id="" placeholder="Amount" value="<%=exp.expdate%>">
                     </div>
                     <button type="submit" class="btn btn-primary btn-right">Update</button>
                   </form>

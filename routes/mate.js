@@ -42,8 +42,13 @@ router.post("/expense",async (req,res)=>{
         expdetail.forEach(ele=>{
             amount = amount + ele.expamount;
         });
-        console.log("detail",mate)
-    res.render("myexpense",{expdetail:expdetail,Mate:mate,totalamount:amount});
+        console.log("detail",mate);
+        let allexp=[];
+        for (let index = expdetail.length-1; index >=0;  index--) {  
+            allexp.push(expdetail[index]);
+        }
+    
+    res.render("myexpense",{expdetail:allexp,Mate:mate,totalamount:amount});
 });
 
 // Edit and Update Route

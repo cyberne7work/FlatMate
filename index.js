@@ -166,7 +166,12 @@ res.redirect('/');
 
 index.get("/home",redirectLogin,async (req,res)=>{
     let a = 0;
+    let allexp=[];
     const expense = await Expense.find({flatid:req.user._id});
+    for (let index = expense.length-1; index>0;  index--) {  
+        allexp.push(expense[index]);
+    }
+    console.log(allexp.length)
     const amount = expense.forEach(exp=>{
         a=a+exp.expamount;
     })
@@ -176,10 +181,10 @@ index.get("/home",redirectLogin,async (req,res)=>{
             const newFlat = new Flat();
             newFlat.flatid=req.user._id;
             const result=await newFlat.save();
-            return res.render("home",{total:a,user:mate,expense:expense,flatinfo:result});
+            return res.render("home",{total:a,user:mate,expense:allexp,flatinfo:result});
         }
         
-    res.render("home",{total:a,user:mate,expense:expense,flatinfo:flat});
+    res.render("home",{total:a,user:mate,expense:allexp,flatinfo:flat});
 });
 
 index.get("/",redirectHome,async (req,res)=>{

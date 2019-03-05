@@ -1,5 +1,7 @@
 <% include ./particles/header %>
+    <div class="top">
 
+    </div>
     <div class="container">
         <div class="jumbotron">
             <%if(!flatinfo.flatname){%>
@@ -24,6 +26,21 @@
             </div>
             
             </div>
+            <div>
+                <div class="exp-heading">
+                 Expense By
+                 <div class="exp-heading-form">
+                     <form action="/mate/expense" method="POST">
+                         <select class="" name="selecteduser"  required>
+                             <%user.forEach(mate=>{%>
+                                 <option value="<%=mate.matename%>" class="opt-user"><%=mate.matename%></option>
+                             <%})%>                        
+                         </select>
+                         <button type="submit" class="btn-submit">View</button>
+                     </form>
+                 </div>
+                </div>
+         </div>
             <%if(user.length !==0){%>
                 <div class="heading">
                         Add Expense
@@ -38,6 +55,10 @@
                       <label for="exampleInputPassword1">Amount</label>
                       <input type="number" class="form-control" name="expamount" id="exampleInputPassword1" placeholder="Amount" required>
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Date of Expense</label>
+                        <input type="date" class="form-control" name="expdate" id="" placeholder="Date" required>
+                      </div>
                     
                       <div class="expenseby">
                           Expense By
@@ -56,21 +77,7 @@
             <div class="clearfix">
 
             </div>
-            <div>
-                    <div class="exp-heading">
-                     Expense By User
-                     <div class="exp-heading-form">
-                         <form action="/mate/expense" method="POST">
-                             <select class="" name="selecteduser"  required>
-                                 <%user.forEach(mate=>{%>
-                                     <option value="<%=mate.matename%>" class="opt-user"><%=mate.matename%></option>
-                                 <%})%>                        
-                             </select>
-                             <button type="submit" class="btn-submit">Submit</button>
-                         </form>
-                     </div>
-                    </div>
-             </div>
+           
 
             <div class="heading">
                     All Expense Detail
