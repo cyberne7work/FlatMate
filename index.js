@@ -104,7 +104,7 @@ passport.use(new LocalStrategy({
 passport.use(new GoogleStrategy({
     clientID: '350897290049-rmc4tgn52jsrtvospvv0jpj9vqfsrtsv.apps.googleusercontent.com',
     clientSecret: '8U-birc3NUKnHtCe2s3tGp2f',
-    callbackURL: "https://boiling-springs-44996.herokuapp.com/auth/facebook/callback"
+    callbackURL: "https://boiling-springs-44996.herokuapp.com/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
       console.log(profile)
