@@ -131,6 +131,7 @@
     width: 100%;
     color: #fff;
     background: #4060B8;
+    border: none;
     padding: 10px;
     font-size: 1.3rem;
     border-radius: 5px;
@@ -152,6 +153,7 @@
     padding: 10px;
     font-size: 1.3rem;
     font-size: 1.2rem;
+    border: none;
     letter-spacing: 1px;
     border-radius: 5px;
     margin: 10px 0px;
