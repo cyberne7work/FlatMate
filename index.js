@@ -168,7 +168,7 @@ index.get("/home",redirectLogin,async (req,res)=>{
     let a = 0;
     let allexp=[];
     const expense = await Expense.find({flatid:req.user._id});
-    for (let index = expense.length-1; index>0;  index--) {  
+    for (let index = expense.length-1; index>=0;  index--) {  
         allexp.push(expense[index]);
     }
     console.log(allexp.length)
