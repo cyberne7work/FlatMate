@@ -6,6 +6,8 @@ const session           =require("express-session");
 const passport          =require("passport");
 const LocalStrategy     =require("passport-local").Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 const cookieParser      =require("cookie-parser");
 const MongoStore = require('connect-mongo')(session);
 const Expense     =require("./models/expense");
@@ -85,7 +87,6 @@ passport.use(new LocalStrategy({
       }
       else{
           const user = new User();
-          console.log("Profile is",profile.id)
             user.facebook.id=profile.id;
             user.facebook.email=profile.emails[0].value;
             user.save(function(err,user){
@@ -98,6 +99,34 @@ passport.use(new LocalStrategy({
       }
       
     });
+  }
+));
+passport.use(new GoogleStrategy({
+    clientID: '350897290049-rmc4tgn52jsrtvospvv0jpj9vqfsrtsv.apps.googleusercontent.com',
+    clientSecret: '8U-birc3NUKnHtCe2s3tGp2f',
+    callbackURL: "https://boiling-springs-44996.herokuapp.com/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+      console.log(profile)
+    User.findOne({"google.id":profile.id}, function(err, user) {
+        if (err) { return done(err); }  
+        if(user){
+            return done(null,user);
+        }
+        else{
+            const user = new User();
+              user.google.id=profile.id;
+              user.google.email=profile.emails[0].value;
+              user.save(function(err,user){
+                  if(err){
+                      return done(err,false);
+                  }
+                  return done(null,user)
+              })
+          
+        }
+        
+      });
   }
 ));
 
@@ -119,12 +148,21 @@ index.use("/mate",mateRouter);
 index.use("/flat",flatRouter);
 
 
+
 index.get('/auth/facebook',
   passport.authenticate('facebook',{ scope:  ['public_profile', 'email'] })
 );
 index.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/home',
                                       failureRedirect: '/login' }));
+index.get('/auth/google',passport.authenticate('google', { scope:
+    [ 'https://www.googleapis.com/auth/plus.login',
+      'https://www.googleapis.com/auth/plus.profile.emails.read' ] }));
+ index.get('/auth/google/callback',passport.authenticate('google', { failureRedirect: '/login' }),
+ function(req, res) {
+// Successful authentication, redirect home.
+res.redirect('/');
+});
 
 index.get("/home",redirectLogin,async (req,res)=>{
     let a = 0;

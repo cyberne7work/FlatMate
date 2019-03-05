@@ -10,7 +10,10 @@ const userSchema= new mongoose.Schema({
     },
     facebook         : {
         id           : String,
-        token        : String,
+        email        : String
+    },
+    google         : {
+        id           : String,
         email        : String
     }
 
