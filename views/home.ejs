@@ -28,7 +28,10 @@
             </div>
             <div>
                 <div class="exp-heading">
-                 Expense By
+                    <div class="form-heading">
+                        <p>Expense By</p>
+                    </div>
+                 
                  <div class="exp-heading-form">
                      <form action="/mate/expense" method="POST">
                          <select class="" name="selecteduser"  required>
@@ -36,7 +39,7 @@
                                  <option value="<%=mate.matename%>" class="opt-user"><%=mate.matename%></option>
                              <%})%>                        
                          </select>
-                         <button type="submit" class="btn-submit">View</button>
+                         <button type="submit" class="btn-submit btn btn-success">View</button>
                      </form>
                  </div>
                 </div>
