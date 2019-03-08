@@ -13,19 +13,19 @@ router.get("/signup",redirectHome,async (req,res)=>{
 router.post("/signup",async (req,res)=>{
 
     if(req.body.password !== req.body.cnfrmpassword){
-        return res.send("Password and Confirm  Password  Does't Match")
-    }
-    console.log(req.body);
-    
+        req.flash("error","Password must be Same");
+        return res.redirect("/user/signup")
+    }    
     const foundUser = await User.findOne({'local.email':req.body.email});
     if(foundUser){
-        return res.send("Email Already Found");
+        req.flash("error","Email already Exits")
+        return res.redirect("/user/signup")
     }
     const newUser = new User();
         newUser.local.email=req.body.email,
         newUser.local.password=newUser.generateHash(req.body.password);
-        console.log("pass"); 
     if(!newUser){
+        req.flash("error","New Account Can't Be Created");
         return console.log("User cant be Created");
     }
     const result    =await newUser.save();
@@ -34,23 +34,26 @@ router.post("/signup",async (req,res)=>{
         newFlat.flatid=req.user._id;
         const result= await newFlat.save();
         console.log(result);
+        req.flash("sucess","Account Created Succesfully");
         res.redirect("/home"); 
      });
 });
 
 router.post("/login",passport.authenticate('local',{
     successRedirect:"/home",
-    failureRedirect:"/fail"
+    failureRedirect:"/"
 }));
 
 router.post("/logout",(req,res)=>{
-    req.session.destroy(err=>{
-        if(err){
-            return res.redirect("/home")
-        }
-        res.clearCookie();
-        res.redirect("/");
-    })
+    // req.session.destroy(err=>{
+    //     if(err){
+    //         return res.redirect("/home")
+    //     }
+    //     res.clearCookie();
+        req.logout();
+        req.flash("error","Logged Out");
+        res.redirect("/login");
+    // })
 })
 
 

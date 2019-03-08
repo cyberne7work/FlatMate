@@ -4,6 +4,11 @@
 </div>
     <div class="container">
         <div class="login">
+               <% if(error && error.length > 0){ %>
+                    <div class="alert alert-danger" role="alert">
+                            <%=error%> 
+                           </div>
+                <%}%>
             <form action="/user/signup" method="POST">
                 
                 <div class="form-group">
@@ -22,7 +27,7 @@
                     <a href="/login"> <span>Back to Login</span> </a>
                 </div>
                 
-                <button type="submit" class="btn-signup">Signup</button>
+                <button type="submit" class="btn btn-outline-success btn-signup">Signup</button>
             </form>
         </div>
     </div>

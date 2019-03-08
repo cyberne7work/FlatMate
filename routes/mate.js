@@ -19,11 +19,12 @@ router.post("/newMate",async (req,res)=>{
     const mate = await newMate.save();
     
     if(!mate){
-        return res.send("Can't Create new Mate")
+        return res.send("/")
     }else{
         const flat = await Flat.findOne({flatid:req.user._id});
         flat.mates.push(mate);
         await flat.save();
+        req.flash("sucess","New Mate Added");
         return res.redirect("/");  
     }
       
@@ -31,7 +32,6 @@ router.post("/newMate",async (req,res)=>{
 
 router.get("/info",async (req,res)=>{
     const mate = await Mate.find({mateid:req.user._id});
-    console.log(mate);
     res.render("mateinfo",{mate:mate});
 });
 
@@ -42,12 +42,10 @@ router.post("/expense",async (req,res)=>{
         expdetail.forEach(ele=>{
             amount = amount + ele.expamount;
         });
-        console.log("detail",mate);
         let allexp=[];
         for (let index = expdetail.length-1; index >=0;  index--) {  
             allexp.push(expdetail[index]);
         }
-    
     res.render("myexpense",{expdetail:allexp,Mate:mate,totalamount:amount});
 });
 
@@ -63,8 +61,10 @@ router.get("/:id",async (req,res)=>{
 router.put("/:id",async (req,res)=>{
     const mate = await Mate.findByIdAndUpdate(req.params.id,{$set:req.body.Mate});
     if(!mate){
+
         return res.send("Mate Not Found")
     }
+    req.flash("sucess","Updated..")
     res.redirect("/mate/info");
 });
 
@@ -76,6 +76,7 @@ router.delete("/:id",async (req,res)=>{
     if(!mate){
         return res.send("Mate Not Found")
     }
+    req.flash("sucess","Deleted");
     res.redirect("/mate/info");
 });
 

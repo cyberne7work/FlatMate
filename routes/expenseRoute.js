@@ -12,8 +12,6 @@ router.post("/newexpense",async (req,res)=>{
     newExp.expamount=expamount,
     newExp.expby=expby,
     newExp.expdate=expdate
-
-    
     const expense = await newExp.save();
     if(!expense){
         return res.send("Cant post new expense")
@@ -21,6 +19,7 @@ router.post("/newexpense",async (req,res)=>{
         const foundFlat = await Flat.findOne({flatid:req.user._id});
         foundFlat.expense.push(expense);
         const result = await foundFlat.save();
+        req.flash("sucess","Expense Added...")
         return res.redirect("/");
     }
     res.redirect("/");    
@@ -32,12 +31,13 @@ router.get("/expense/:id",async (req,res)=>{
 })
 router.put("/expense/:id",async (req,res)=>{    
     const foundExp  = await Expense.findByIdAndUpdate(req.params.id,{$set:req.body.newexp});
+    req.flash("sucess","Updated Succesfully...");
     res.redirect("/");
 })
 router.delete("/expense/:id",async (req,res)=>{
-    
     const foundExp  = await Expense.findByIdAndDelete(req.params.id);
-    res.redirect("/");
+    req.flash("Deleted..")
+    res.redirect("/user/expense");
 })
 
 

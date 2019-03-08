@@ -3,6 +3,11 @@
 
 </div>
     <div class="container">
+            <% if(sucess && sucess.length > 0){ %>
+                <div class="alert alert-success" role="alert">
+                        <%=sucess%> 
+                       </div>
+            <%}%>
         <div class="row">
             <%mate.forEach(person=>{%>
 

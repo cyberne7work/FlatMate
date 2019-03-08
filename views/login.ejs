@@ -3,7 +3,15 @@
 
 </div>
     <div class="container">
+           
+           
+
         <div class="login">
+                <% if(error && error.length >0){ %>
+                    <div class="alert alert-danger" role="alert">
+                            <%=error%> 
+                           </div>
+                <%}%>
             <form action="/user/login" method="POST">
                 <div class="form-group">
                         <label for="">Email</label>
