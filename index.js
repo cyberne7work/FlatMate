@@ -22,7 +22,6 @@ const redirectHome =require("./middleware/redirectHome");
 const index   =express();
 
 // Database
-const db="vishal:cyberne7work@ds117469.mlab.com:17469/flatmate";
 mongoose.connect("mongodb://vishal:cyberne7work@ds117469.mlab.com:17469/flatmate",{ useNewUrlParser: true })
     .then(()=>{console.log("Connected to Database")})
     .catch((err)=>{console.log(err.message)});

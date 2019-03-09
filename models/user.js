@@ -7,6 +7,9 @@ const userSchema= new mongoose.Schema({
     local            : {
         email        : String,
         password     : String,
+        resetToken   : String,
+        resetPassExp :Date
+        
     },
     facebook         : {
         id           : String,

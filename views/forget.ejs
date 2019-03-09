@@ -1,0 +1,27 @@
+<%include ./particles/header%>
+<div class="container">
+        <div class="top">
+
+            </div>
+        <div class="login">
+                <% if(error && error.length > 0){ %>
+                    <div class="alert alert-danger" role="alert">
+                            <%=error%> 
+                           </div>
+                <%}%>
+               
+            <form action="/user/forget" method="POST">
+                
+                <div class="form-group">
+                        <label for="">Email</label>
+                        <input type="email" class="form-control emailinput" name="email" id="" required>  
+                </div>
+                <div>
+                    <a href="/login"> <span>Back to Login</span> </a>
+                </div>
+                
+                <button type="submit" class="btn btn-outline-primary btn-signup">Submit</button>
+            </form>
+        </div>
+    </div>
+<%include ./particles/footer%>

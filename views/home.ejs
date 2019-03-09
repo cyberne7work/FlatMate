@@ -8,6 +8,11 @@
                         <%=sucess%> 
                        </div>
             <%}%>
+            <% if(error && error.length > 0){ %>
+                <div class="alert alert-danger" role="alert">
+                        <%=error%> 
+                       </div>
+            <%}%>
         <div class="jumbotron">
             <%if(!flatinfo.flatname){%>
                 <div>
